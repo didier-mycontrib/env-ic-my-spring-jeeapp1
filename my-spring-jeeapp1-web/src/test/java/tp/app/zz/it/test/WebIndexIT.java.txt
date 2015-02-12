@@ -1,0 +1,39 @@
+package tp.app.zz.it.test;
+
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+
+import com.thoughtworks.selenium.DefaultSelenium;
+import com.thoughtworks.selenium.Selenium;
+
+/* test d'integration avec JUnit 
+ * nb: convention maven pour test d'intégration: nom de classe se terminant par "IT" (.java) */
+
+public class WebIndexIT {
+	
+	    private  Selenium selenium;
+	
+	    @Before
+	    public  void beforeTests(){
+	        selenium = new DefaultSelenium("localhost",4444, "*firefox", "http://localhost:8080/my-spring-jeeapp1-web");
+	        selenium.start();
+	    }
+	    @After
+	    public  void afterTests(){
+	        selenium.stop();
+	        selenium = null;
+	    }
+	    @Test
+	    public void testWebIndex() throws Exception
+	    {
+	        selenium.open("http://localhost:8080/my-spring-jeeapp1-web/index.html");
+	        selenium.waitForPageToLoad("5000");
+	        Assert.assertTrue(selenium.isTextPresent("bienvenue"));
+	        Assert.assertEquals("Index devise-web", selenium.getTitle());
+	    }
+	
+	
+
+}

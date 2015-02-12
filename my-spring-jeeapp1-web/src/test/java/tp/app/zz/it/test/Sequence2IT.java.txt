@@ -1,0 +1,44 @@
+package tp.app.zz.it.test;
+
+import com.thoughtworks.selenium.*;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+import static org.junit.Assert.*;
+import java.util.regex.Pattern;
+
+public class Sequence2IT {
+	private Selenium selenium;
+
+	@Before
+	public void setUp() throws Exception {
+		selenium = new DefaultSelenium("localhost", 4444, "*firefox", "http://localhost:8080/");
+		selenium.start();
+	}
+
+	@Test
+	public void testSequence2IT() throws Exception {
+		selenium.open("/my-spring-jeeapp1-web/");
+		selenium.click("link=bienvenue");
+		selenium.waitForPageToLoad("30000");
+		
+		Assert.assertTrue(selenium.isTextPresent("myapp"));
+		
+		selenium.click("link=conversion");
+		selenium.waitForPageToLoad("30000");
+		
+		Assert.assertTrue(selenium.isTextPresent("conversion"));
+		
+		selenium.type("id=frm:m1", "euro");
+		selenium.type("id=frm:m2", "dollar");
+		selenium.type("id=frm:montantInput", "12");
+		selenium.click("id=frm:convertButton");
+		selenium.waitForPageToLoad("30000");
+	}
+
+	@After
+	public void tearDown() throws Exception {
+		selenium.stop();
+	}
+}
