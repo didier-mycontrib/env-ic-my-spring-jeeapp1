@@ -102,7 +102,7 @@ public abstract class  GenericDaoTest<T,ID extends Serializable> {
 			genericDao.persistNewEntity(newEntity); // appel d'une méthode transactionnelle
 			this.genericPk = this.getPkOfEntity(newEntity);
 			if(withDeep)				
-			     System.out.println("\t id(pk) du nouveau Compte cr��: " + genericPk);
+			     System.out.println("\t id(pk) du nouveau Compte créé: " + genericPk);
 			} catch(RuntimeException ex){
       	    	System.err.println(ex.getMessage());
       	    	Assert.fail(ex.getMessage());
@@ -115,7 +115,7 @@ public abstract class  GenericDaoTest<T,ID extends Serializable> {
 			e = genericDao.getEntityById(this.genericPk);
 			this.assertValuesOfNewEntity(e);
 			if(withDeep){
-			    System.out.println("\t valeurs initiales de l'entit� (cr��e): " + e.toString());
+			    System.out.println("\t valeurs initiales de l'entité (créée): " + e.toString());
 			    // éventuel test ou affichage d'un élément (ou collection) lié(e) - lazy=true ? 
 			    assertNewAttachedOtherEntities(e);
 			    displayAttachedOtherEntities(e);			
@@ -150,7 +150,7 @@ public abstract class  GenericDaoTest<T,ID extends Serializable> {
 			e = genericDao.getEntityById(this.genericPk);
 			this.assertChangedValuesOfNewEntity(e);
 			if(withDeep){
-				System.out.println("\t nouvelle valeur de l'entit� (modifi�e): " + e.toString());
+				System.out.println("\t nouvelle valeur de l'entité (modifiée): " + e.toString());
 			    // + éventuel test ou affichage d'un élément (ou collection) lié(e) - lazy=true ? 
 				assertApdatedAttachedOtherEntities(e);
 				displayAttachedOtherEntities(e);
@@ -175,7 +175,7 @@ public abstract class  GenericDaoTest<T,ID extends Serializable> {
 		try {
 			T e = genericDao.getEntityById(this.genericPk);
 			if(e==null && withDeep)
-			     System.out.println("\t entit� bien supprim�e");
+			     System.out.println("\t entité bien supprimée");
 			Assert.assertTrue(e == null);
 		} catch(RuntimeException ex){
       	    	System.err.println(ex.getMessage());
